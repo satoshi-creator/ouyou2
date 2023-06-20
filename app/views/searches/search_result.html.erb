@@ -1,0 +1,43 @@
+<% if @range == "User" %>
+<h2>Users search result</h2>
+<% else %>
+<h2>Books search result</h2>
+<% end %>
+
+<table class="table table-hover table-inverse">
+  <% if @range == "User" %>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td></td>
+          <td>Name</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to(book.user) do %>
+              <%= image_tag book.user.get_profile_image, size:'50x50' %>
+            <% end %>
+          </td>
+          <td><%= link_to book.title,book %></td>
+          <td><%= book.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
